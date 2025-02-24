@@ -3,7 +3,7 @@ It allows users to browse job listings, apply for jobs, and receive email notifi
 Employers can post job openings and manage applications efficiently.
 The project is built with scalability and user-friendliness in mind.
 
-Technologies Used
+#Technologies Used
 
 Node.js – Backend runtime environment
 
@@ -15,16 +15,16 @@ Nodemailer – For sending emails
 
 Express-session – Authentication and session management
 
-Installation & Usage
+#Installation & Usage
 
-Clone the Repository
+#Clone the Repository
 git clone https://github.com/sindhupallavi14/Job-Hive.git
 cd Job-Hive
 
-Install Dependencies
+#Install Dependencies
 npm install
 
-Access the Application:
+#Access the Application:
 Open your browser and go to:
 http://localhost:5100/
 
