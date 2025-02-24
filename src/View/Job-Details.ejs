@@ -1,0 +1,66 @@
+<div
+  class="container d-flex justify-content-center align-items-center min-vh-90"
+>
+  <div class="card shadow-lg p-4" style="width: 500px">
+    <!-- Job Title & Company Name -->
+    <h2 class="text-primary text-center">
+      <%= job.jobCategory %> - <%= job.jobDesignation %>
+    </h2>
+    <h4 class="text-center text-muted"><%= job.companyName %></h4>
+
+    <hr />
+
+    <!-- Job Details -->
+    <div class="row">
+      <div class="col-md-6">
+        <p>
+          <strong>Job Role: </strong><%= job.jobCategory %> - <%=
+          job.jobDesignation %>
+        </p>
+        <p><strong>Location: </strong><%= job.location %></p>
+        <p><strong>Package:</strong><%= job.salary %></p>
+        <p><strong>Apply by:</strong><%= job.applyBy %></p>
+        <p><strong>No. of Openings:</strong> <%= job.openings %></p>
+      </div>
+    </div>
+
+    <!-- Applicants Count -->
+    <p>
+      <strong>Applicants:</strong>
+      <% if (session.userName) { %>
+      <a style="text-decoration: none; color: red" href="/applicants"
+        ><%= job.applicants %></a
+      >
+      <% } else { %>
+      <span style="color: red"><%= job.applicants %></span>
+      <% } %>
+    </p>
+
+    <!-- Apply Now Button -->
+    <div class="text-center mt-4">
+      <% if(!session.user) { %>
+      <button
+        class="btn btn-success btn-lg"
+        data-bs-toggle="modal"
+        data-bs-target="#applyNowModal"
+      >
+        Apply Now
+      </button>
+      <% }else { %>
+        <button
+        class="btn btn-success btn-lg"
+        data-bs-toggle="modal"
+        data-bs-target="#applyNowModal"
+        disabled
+      >
+        Apply Now
+      </button>
+      
+       
+     <% } %>
+      
+    </div>
+  </div>
+</div>
+
+<%- include("Apply-form.ejs") %>

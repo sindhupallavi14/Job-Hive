@@ -1,0 +1,92 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Available Jobs</h2>
+
+  <div class="row">
+    <% jobs.forEach(job => { %>
+    <div class="col-md-4">
+      <div class="card shadow-lg p-3 mb-4">
+        <button
+          type="button"
+          class="btn btn-warning"
+          style="
+            margin: 8px 20px 0px;
+            display: flex;
+            justify-content: space-around;
+            cursor: auto;
+          "
+        >
+          <div>
+            Actively Hiring
+            <img src="trend.png" style="width: 25px" />
+          </div>
+          <% if (typeof session.userName !== 'undefined') { %>
+          <div>
+            <a href="/update/<%= job.id %>" style="text-decoration: none">
+              <img src="edit.png" style="width: 25px; cursor: pointer" />
+            </a>
+            <a
+              href="#"
+              onclick="confirmDelete('<%= job.id %>')"
+              style="text-decoration: none"
+            >
+              <img src="delete.png" style="width: 25px; cursor: pointer" />
+            </a>
+          </div>
+          <% } %>
+        </button>
+
+        <div class="card-body">
+          <h5 class="card-title"><%= job.companyName %></h5>
+          <p class="card-text">
+            <%= job.jobCategory %> - <%= job.jobDesignation %>
+          </p>
+        </div>
+
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <strong>Location:</strong> <%= job.location %>
+          </li>
+          <li class="list-group-item">
+            <strong>Skills Required:</strong> <%= job.Skills %>
+          </li>
+          <li class="list-group-item">
+            <strong>Salary:</strong> <%= job.salary %>
+          </li>
+          <li class="list-group-item">
+            <strong>Openings:</strong> <%= job.openings %>
+          </li>
+          <li class="list-group-item">
+            <strong>Apply By:</strong> <%= job.applyBy %>
+          </li>
+        </ul>
+
+        <div class="card-body text-center">
+          <a href="/jobs/<%= job.id %>" class="btn btn-info">View Details</a>
+        </div>
+      </div>
+    </div>
+    <% }); %>
+  </div>
+</div>
+
+<script>
+  function confirmDelete(jobId) {
+    const isConfirmed = confirm("Are you sure you want to delete this job?");
+
+    if (isConfirmed) {
+      fetch(`/jobs/${jobId}`, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            alert("Job deleted successfully!");
+            location.reload(); // Refresh the page to update the job list
+          } else {
+            alert("Error deleting job: " + data.message);
+          }
+        })
+        .catch((error) => console.error("Error:", error));
+    }
+  }
+</script>

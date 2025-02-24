@@ -1,0 +1,61 @@
+<div class="Rcard">
+  <h1>Update Job</h1>
+  <form action="/update" method="post">
+    <input type="hidden" name="id" value="<%= job.id %>" /> 
+      <div class="mb-3">
+          <label for="jobCategory" class="form-label">Job Category</label>
+          <select class="form-control" id="jobCategory" name="jobCategory">
+              <option value="Tech" <%= job.jobCategory === 'Tech' ? 'selected' : '' %>>Tech</option>
+              <option value="NonTech" <%= job.jobCategory === 'NonTech' ? 'selected' : '' %>>Non-Tech</option>
+          </select>
+      </div>
+
+      <div class="mb-3">
+          <label for="jobDesignation" class="form-label">Job Designation</label>
+          <select class="form-control" id="jobDesignation" name="jobDesignation">
+              <% const designations = ["Software Engineer", "Data Analyst", "Project Manager", "Front-end Developer", "Back-end Developer", "Full-stack Developer", "Java Developer", "HR Manager", "Other"]; %>
+              <% designations.forEach(designation => { %>
+                  <option value="<%= designation %>" <%= job.jobDesignation === designation ? 'selected' : '' %>><%= designation %></option>
+              <% }); %>
+          </select>
+      </div>
+
+      <div class="mb-3">
+          <label for="location" class="form-label">Enter Location</label>
+          <input type="text" class="form-control" id="location" name="location" value="<%= job.location || '' %>"/>
+      </div>
+
+      <div class="mb-3">
+          <label for="companyName" class="form-label">Company Name</label>
+          <input type="text" class="form-control" id="companyName" name="companyName" value="<%= job.companyName || '' %>"/>
+      </div>
+
+      <div class="mb-3 d-flex gap-3">
+          <div class="w-50">
+              <label for="salary" class="form-label">Salary</label>
+              <input type="text" class="form-control" id="salary" name="salary" value="<%= job.salary || '' %>"/>
+          </div>
+          <div class="w-50">
+              <label for="openings" class="form-label">Total Openings</label>
+              <input type="number" class="form-control" id="openings" name="openings" value="<%= job.openings || '' %>"/>
+          </div>
+      </div>
+
+      <div class="mb-3">
+          <label for="skills" class="form-label">Skills Required</label>
+          <select class="form-control" id="skills" name="skills" multiple>
+              <% const allSkills = ["Java", "React", "SQL", "Python", "JavaScript", "Node.js", "HTML/CSS", "C++", "Ruby"]; %>
+              <% allSkills.forEach(skill => { %>
+                  <option value="<%= skill %>" <%= job.Skills && job.Skills.includes(skill) ? 'selected' : '' %>><%= skill %></option>
+              <% }); %>
+          </select>
+      </div>
+
+      <div class="mb-3">
+          <label for="applyBy" class="form-label">Apply By</label>
+          <input type="text" class="form-control" id="applyBy" name="applyBy" value="<%= job.applyBy || '' %>"/>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
