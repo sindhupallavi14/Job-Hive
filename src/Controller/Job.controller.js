@@ -104,4 +104,20 @@ export default class JobController {
         res.status(404).json({ success: false, message: "Job not found" });
     }
   }
+
+  getSearchResults(req, res) {
+  const query = req.query.q?.toLowerCase() || "";
+  const filteredJobs = JobModel.getAll().filter((job) => {
+    return (
+      job.companyName.toLowerCase().includes(query) ||
+      job.jobCategory.toLowerCase().includes(query) ||
+      job.jobDesignation.toLowerCase().includes(query) ||
+      job.location.toLowerCase().includes(query) ||
+      job.Skills.toLowerCase().includes(query)
+    );
+  });
+
+  res.render("Jobs", { jobs: filteredJobs });
+}
+
 }

@@ -41,7 +41,7 @@ server.use("/resumes", express.static("public/resumes"));
 server.get("/",jobController.getHomePage);
 server.get("/jobs",jobController.getJobs);
 server.get("/jobs/:id",jobController.getJobDetails);
-
+server.get("/search",jobController.getSearchResults);
 
 // delete
 server.delete("/jobs/:id",jobController.deleteJob);
